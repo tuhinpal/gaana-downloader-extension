@@ -1,0 +1,7 @@
+{
+    "name": "gaana-downloader-extension",
+    "description": "Download songs from gaana.com, or enjoy an ad free experience. This extension can do all premium stuffs for free.",
+    "logo": "https://firebasestorage.googleapis.com/v0/b/cdn-tuhin.appspot.com/o/1616308784ikda?alt=media&token=19a582b4-b5cd-4f00-acdf-21ba324bd03e",
+    "repository": "https://github.com/cachecleanerjeet/gaana-downloader-extension",
+    "stack": "container"
+}

@@ -1,0 +1,32 @@
+{
+    "name": "Gaana downloader extension",
+    "version": "1.0.0",
+    "manifest_version": 2,
+    "description": "Download songs from gaana.com, or enjoy an ad free experience. This extension can do all premium stuffs for free.",
+    "icons": {
+        "1000": "style/logo.png"
+    },
+    "permissions": [
+        "https://gaana.com/*",
+        "*://*.gaanacdn.com/*"
+    ],
+    "content_scripts": [{
+        "matches": [
+            "https://gaana.com/*"
+        ],
+        "js": [
+            "main.js",
+            "vendor/crypto-js.min.js",
+            "vendor/aes.min.js",
+            "vendor/id3.js",
+            "config.js"
+        ],
+        "css": [
+            "style/main.css"
+        ]
+    }],
+    "web_accessible_resources": [
+        "main.js",
+        "config.js"
+    ]
+}
