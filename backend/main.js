@@ -19,11 +19,15 @@ app.post('/image', async(req, res) => {
     if (!req.body.url) {
         res.send('Provide URL')
     } else {
-        res.set({
-            "Access-Control-Allow-Headers": "*",
-            "Content-Type": "image/jpeg"
-        })
-        res.send((await axios(req.body.url, { responseType: 'arraybuffer' })).data)
+        try {
+            res.set({
+                "Access-Control-Allow-Headers": "*",
+                "Content-Type": "image/jpeg"
+            })
+            res.send((await axios(req.body.url, { responseType: 'arraybuffer' })).data)
+        } catch (err) {
+            console.log('Error!');
+        }
     }
 })
 
@@ -31,23 +35,27 @@ app.post('/converter', (req, res) => {
     if (!req.body.url) {
         res.send('Provide URL')
     } else {
-        res.set({
-            "Content-Type": "audio/mpeg",
-            "Access-Control-Allow-Headers": "*"
-        })
-        new ffmpeg()
-            .addInput(req.body.url)
-            .toFormat('mp3')
-            .outputOptions([
-                '-ab 128k',
-            ])
-            .on('error', function(err, stdout, stderr) {
-                res.send(err.message).end()
+        try {
+            res.set({
+                "Content-Type": "audio/mpeg",
+                "Access-Control-Allow-Headers": "*"
             })
-            .on('end', function(err, stdout, stderr) {
-                console.log('Finished processing!');
-            })
-            .pipe(res, { end: true })
+            new ffmpeg()
+                .addInput(req.body.url)
+                .toFormat('mp3')
+                .outputOptions([
+                    '-ab 128k',
+                ])
+                .on('error', function(err, stdout, stderr) {
+                    res.send(err.message).end()
+                })
+                .on('end', function(err, stdout, stderr) {
+                    console.log('Finished processing!');
+                })
+                .pipe(res, { end: true })
+        } catch (err) {
+            console.log('Error!');
+        }
     }
 })
 
